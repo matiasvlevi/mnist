@@ -100,6 +100,7 @@ function train_batch(n) {
 
     }
     losses.push(sum/b);
+
     console.log("batch_"+int(batchIndex/100)+" loss:"+(sum/b))
   }
 
@@ -120,8 +121,12 @@ function train(e) {
     train_batch(600);
     batchIndex=0;
     let accurracy = test();
+    epoch++;
+    for (let i =0;i < 600; i++) {
+      accuracies.push(accurracy);
+    }
 
-    console.log(accurracy);
+    console.log("epoch: " +epoch+"      accuracy: " +  (accurracy*100) + "%");
   }
 
 }
