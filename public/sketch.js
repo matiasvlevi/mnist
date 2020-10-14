@@ -6,8 +6,8 @@ function setup() {
     .then(data => {
       createCanvas(600,600)
       nn = new Dann(784,10);
-      nn.addHiddenLayer(200,leakyReLU);
-      nn.addHiddenLayer(100,leakyReLU);
+      nn.addHiddenLayer(8,leakyReLU);
+      nn.addHiddenLayer(4,leakyReLU);
 
       nn.makeWeights();
       nn.lr = 0.000003;
@@ -17,6 +17,7 @@ function setup() {
   g = new Graph(0,0,600,200);
   g.addValue(losses,color(0,150,255),"loss");
   g.addValue(accuracies,color(255,150,0),"accurracy");
+  g.step = 600;
 
 }
 function draw() {
