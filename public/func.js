@@ -77,8 +77,25 @@ function test() {
   }
   return succes/10000;
 }
+function calcSlope(x1,y1,x2,y2) {
+    let top = y2-y1;
+    let down = x2-x1;
+    return top/down;
+}
+function linear_s(slope,x,b) {
+    return slope*x+b;
+}
+function getInbetweenPoints(x1,y1,x2,y2,step) {
+    let arr = [];
+    let length = 1;
+    for (let i = 0; i < step;i++) {
+        arr[i] = linear_s(calcSlope(x1,y1,x2,y2),(i)/step,y1);
+    }
+    return arr;
+}
 let losses = [];
 let accuracies = [];
+let acc=[0];
 let batchIndex = 0;
 let epoch = 0;
 function train_batch(n) {
@@ -99,7 +116,8 @@ function train_batch(n) {
       sum += nn.loss;
 
     }
-    losses.push(sum/b);
+    let loss = sum/b;
+    losses.push(loss);
     console.log("batch_"+int(batchIndex/100)+" loss:"+(sum/b))
   }
 
@@ -117,9 +135,17 @@ function findBiggest(arr) {
 }
 function train(e) {
   for (let i = 0; i < e; i++) {
+    console.log("Epoch "+i +"___________________________________________________________________________________________")
     train_batch(600);
     batchIndex=0;
     let accurracy = test();
+
+    acc.push(accurracy);
+    let newarr = getInbetweenPoints(1,acc[acc.length-2],2,acc[acc.length-1],600);
+    for (let i = 0; i < newarr.length;i++) {
+        accuracies.push(newarr[i]);
+    }
+
 
     console.log(accurracy);
   }
