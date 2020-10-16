@@ -120,7 +120,7 @@ function train_batch(n) {
     losses.push(loss);
     console.log("batch_"+int(batchIndex/100)+" loss:"+(sum/b))
   }
-
+  batchIndex=0;
 }
 function findBiggest(arr) {
   let best = 0;
@@ -135,10 +135,10 @@ function findBiggest(arr) {
 }
 function train(e) {
   for (let i = 0; i < e; i++) {
-    let starttime = printTime();
-    console.log("%c Epoch "+ globalepoch +" ___________________________________________________________________________________________","color: #4AEFC6");
+    let starttime = printTime12();
+    console.log("%c Epoch "+ globalepoch,"color: #4AEFC6");
     train_batch(600);
-    batchIndex=0;
+
     let accurracy = test();
 
     acc.push(accurracy);
@@ -147,20 +147,32 @@ function train(e) {
         accuracies.push(newarr[i]);
     }
 
-    console.log("%c Epoch "+globalepoch+" complete | Accuracy: "+accurracy+" | Start time: "+starttime+" | End time: "+printTime(),"color: #4AEFC6")
+    console.log("%c Epoch "+globalepoch+" complete | Accuracy: "+accurracy+" | Start time: "+starttime+" | End time: "+printTime12(),"color: #4AEFC6")
     globalepoch++;
   }
 
 }
-function printTime() {
-    let d = JSON.stringify(new Date());
-    let strarr  = d.split("T");
-    let date = strarr[0].split('"')[1];
-    let time = strarr[1].split(".")[0];
-    let splittime = time.split(":");
-    let hour = splittime[0]-4;
-    let min = splittime[1];
+function printTime24() {
+
+    let time = Date().split(" ")[4].split(":");
+    let hour = time[0];
+    let min = time[1];
     return hour+"h"+min;
+
+}
+function printTime12() {
+
+    let time = Date().split(" ")[4].split(":");
+    let hour = time[0];
+    let min = time[1];
+    let half = "none";
+    if (hour > 12) {
+        hour -= 12;
+        half = "PM"
+    } else {
+        half = "AM"
+    }
+    return hour+":"+min+" " + half;
 
 }
 function makeLabel(x) {
