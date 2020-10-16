@@ -136,6 +136,7 @@ function findBiggest(arr) {
 function train(e) {
   for (let i = 0; i < e; i++) {
     let starttime = printTime12();
+    console.log(starttime)
     console.log("%c Epoch "+ globalepoch,"color: #4AEFC6");
     train_batch(600);
 
@@ -146,10 +147,69 @@ function train(e) {
     for (let i = 0; i < newarr.length;i++) {
         accuracies.push(newarr[i]);
     }
-
-    console.log("%c Epoch "+globalepoch+" complete | Accuracy: "+accurracy+" | Start time: "+starttime+" | End time: "+printTime12(),"color: #4AEFC6")
+    let currentTime = printTime12();
+    console.log(currentTime)
+    console.log("%c Epoch "+globalepoch+" complete | Accuracy: "+accurracy+" | Start time: "+starttime+" | End time: "+currentTime + " | Time Elapsed: " + calcTimeElapsed(starttime,currentTime),"color: #4AEFC6")
     globalepoch++;
   }
+
+}
+let a = "9:59 AM";
+let b = "00:30 PM";
+function calcTimeElapsed(t1,t2) {
+    let time1 = t1.split(" ");
+    let time2 = t2.split(" ");
+    let add1 = 0;
+    let add2 = 0;
+    if (time1[1] == "PM") {
+        add1 = 12;
+    }
+    if (time2[1] == "PM") {
+        add2 = 12;
+    }
+    let h1 = time1[0].split(":")[0];
+    let h2 = time2[0].split(":")[0];
+    if (h1[0] == "0") {
+        h1 = h1.split("")[1];
+
+    }
+    if (h2[0] == "0") {
+        h2 = h2.split("")[1];
+
+    }
+    let hour1 = JSON.parse(h1[0])+add1;
+    let hour2 = JSON.parse(h2[0])+add2;
+    let st1 = time1[0].split(":")[1];
+    let st2 = time2[0].split(":")[1];
+
+    if (st1[0] == "0") {
+        st1 = st1.split("")[1];
+
+    }
+    if (st2[0] == "0") {
+        st2 = st2.split("")[1];
+
+    }
+
+    let min1 = JSON.parse(st1);
+    let min2 = JSON.parse(st2);
+
+    let m1 = (min1+(hour1*60));
+    let m2 = (min2+(hour2*60));
+    let k =  (m2 - m1)/60;
+
+    let stri = "";
+    let mins = round((k-int(k))*60);
+    if (mins < 10) {
+
+        let temp1 = JSON.stringify(mins);
+        stri = "0"+temp1;
+
+    } else {
+        stri = JSON.stringify(mins);
+    }
+    let hours = int(k);
+    return JSON.stringify(hours)+"h"+stri;
 
 }
 function printTime24() {
