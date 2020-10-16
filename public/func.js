@@ -2,7 +2,7 @@ let labels = [];
 let images = [];
 let labels_t = [];
 let images_t = [];
-
+let globalepoch = 1;
 async function loadfile(file, offset) {
     let r = await fetch(file);
     let data = await r.arrayBuffer();
@@ -135,7 +135,8 @@ function findBiggest(arr) {
 }
 function train(e) {
   for (let i = 0; i < e; i++) {
-    console.log("Epoch "+i +"___________________________________________________________________________________________")
+    let starttime = printTime();
+    console.log("%c Epoch "+ globalepoch +" ___________________________________________________________________________________________","color: #4AEFC6");
     train_batch(600);
     batchIndex=0;
     let accurracy = test();
@@ -146,9 +147,20 @@ function train(e) {
         accuracies.push(newarr[i]);
     }
 
-
-    console.log(accurracy);
+    console.log("%c Epoch "+globalepoch+" complete | Accuracy: "+accurracy+" | Start time: "+starttime+" | End time: "+printTime(),"color: #4AEFC6")
+    globalepoch++;
   }
+
+}
+function printTime() {
+    let d = JSON.stringify(new Date());
+    let strarr  = d.split("T");
+    let date = strarr[0].split('"')[1];
+    let time = strarr[1].split(".")[0];
+    let splittime = time.split(":");
+    let hour = splittime[0]-4;
+    let min = splittime[1];
+    return hour+"h"+min;
 
 }
 function makeLabel(x) {

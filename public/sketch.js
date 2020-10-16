@@ -6,8 +6,8 @@ function setup() {
     .then(data => {
       createCanvas(600,600)
       nn = new Dann(784,10);
-      nn.addHiddenLayer(8,leakyReLU);
-      nn.addHiddenLayer(4,leakyReLU);
+      nn.addHiddenLayer(2,leakyReLU);
+
 
       nn.makeWeights();
       nn.lr = 0.000003;
