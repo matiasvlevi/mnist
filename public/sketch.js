@@ -10,13 +10,14 @@ function setup() {
       // nn.addHiddenLayer(128,leakyReLU);
       nn.addHiddenLayer(32,leakyReLU);
       nn.makeWeights();
-      nn.lr = 0.0000001;
+      nn.lr = 0.00000001;
       nn.log();
       dataset = data;
     })
   g = new Graph(0,0,600,200);
   g.addValue(losses,color(0,150,255),"loss");
-  g.addValue(accuracies,color(255,100,0),"accuracy");
+  g.addValue(accuracies,color(255,150,0),"accurracy");
+  g.step = 600;
 
 }
 function draw() {
