@@ -142,9 +142,9 @@ function train(e) {
 
     let accurracy = test();
     epoch++;
-    for (let i =0;i < 600; i++) {
-      accuracies.push(accurracy);
-    }
+    // for (let i =0;i < 600; i++) {
+    //   accuracies.push(accurracy);
+    // }
 
     acc.push(accurracy);
     let newarr = getInbetweenPoints(1,acc[acc.length-2],2,acc[acc.length-1],600);

@@ -7,10 +7,11 @@ function setup() {
       createCanvas(600,600)
       nn = new Dann(784,10);
       //nn.addHiddenLayer(256,leakyReLU);
-      // nn.addHiddenLayer(128,leakyReLU);
-      nn.addHiddenLayer(32,leakyReLU);
+      nn.addHiddenLayer(200,leakyReLU);
+      nn.addHiddenLayer(100,leakyReLU);
       nn.makeWeights();
-      nn.lr = 0.00000001;
+      nn.lr = 0.000001;
+      nn.lossfunc = crossEntryopy;
       nn.log();
       dataset = data;
     })
