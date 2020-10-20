@@ -11,7 +11,7 @@ function setup() {
       nn.addHiddenLayer(100,leakyReLU);
       nn.makeWeights();
       nn.lr = 0.000001;
-      nn.lossfunc = crossEntryopy;
+      nn.lossfunc = lcl;
       nn.log();
       dataset = data;
     })
