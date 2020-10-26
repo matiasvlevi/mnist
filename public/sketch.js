@@ -6,12 +6,11 @@ function setup() {
     .then(data => {
       createCanvas(600,600)
       nn = new Dann(784,10);
-      //nn.addHiddenLayer(256,leakyReLU);
-      nn.addHiddenLayer(200,leakyReLU);
-      nn.addHiddenLayer(100,leakyReLU);
+      nn.addHiddenLayer(192,leakyReLU);
+      nn.addHiddenLayer(72,leakyReLU);
+      nn.addHiddenLayer(32,leakyReLU);
       nn.makeWeights();
-      nn.lr = 0.000001;
-      nn.lossfunc = crossEntryopy;
+      nn.lr = 0.0000001;
       nn.log();
       dataset = data;
     })

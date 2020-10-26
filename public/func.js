@@ -160,6 +160,35 @@ function train(e) {
 }
 let a = "9:59 AM";
 let b = "00:30 PM";
+let loadj = {};
+function loadjson() {
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = e => {
+
+       // getting a hold of the file reference
+       let file = e.target.files[0];
+
+       // setting up the reader
+       let reader = new FileReader();
+       reader.readAsText(file,'UTF-8');
+
+       // here we tell the reader what to do when it's done reading...
+       reader.onload = readerEvent => {
+          let content = readerEvent.target.result; // this is the content!
+         // console.log( content );
+
+          loadj =  JSON.parse(content);
+
+          input.remove();
+       }
+
+    }
+
+    let container = document.getElementById('container');
+    container.appendChild(input);
+
+}
 function calcTimeElapsed(t1,t2) {
     let time1 = t1.split(" ");
     let time2 = t2.split(" ");
