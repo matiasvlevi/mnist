@@ -2,6 +2,8 @@
 
 MNIST classification task performed by the Dann library
 
+run the python server and connect to localhost:3000
+
 
 Note
 -------
